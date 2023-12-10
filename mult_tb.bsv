@@ -21,21 +21,5 @@ module mkFoldedMultiplierTB;
         end
     endrule
 
-    rule advanceCycles;
-        if (!testDone) begin
-            cycleCount <= cycleCount + 1;
-        end
-    endrule
-
-    rule stopSimulation;
-        if (cycleCount == 1000) begin
-            $finish;
-        end
-    endrule
-
-    always @(posedge dut.start_mul());
-        $display("Cycle %0d", cycleCount);
-    endrule
-
 endmodule
 endpackage
