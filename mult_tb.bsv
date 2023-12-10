@@ -3,7 +3,7 @@ import mult::*;
 
 module mkFoldedMultiplierTB;
 
-    Multiplier#(32, TAdd#(32, 32)) dut <- mkFoldedMultiplier;
+    Multiplier dut <- mkFoldedMultiplier;
     Bit#(32) a_init = 5;
     Bit#(32) b_init = 3;
 
