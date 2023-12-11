@@ -33,7 +33,7 @@ module mkFoldedMultiplier(Multiplier);
 
     Reg#(Bool) advance_to_stage2 <- mkReg(False);
     
-    rule mulStep_stage1(i_stage1 < (fromInteger(valueOf(32)/2)));
+    rule mulStep_stage1 if(i_stage1 < (fromInteger(valueOf(32)/2)));
         Bit#(32) m = (a[i_stage1] == 0) ? 0 : b;
         let s = ripple(m, tp_stage1, 0);
         p_stage1[i_stage1] <= s[0];
@@ -42,16 +42,14 @@ module mkFoldedMultiplier(Multiplier);
         advance_to_stage2 <= (i_stage1 == fromInteger(valueOf(32)/2));
     endrule
 
-    rule pipelineAdvance;
-        if (advance_to_stage2) begin
+    rule pipelineAdvance if(advance_to_stage2);
             i <= fromInteger(valueOf(32)/2);           
             p <= p_stage1;
             tp <= tp_stage1;
             advance_to_stage2 <= False; 
-        end
     endrule
 
-    rule mulStep_stage2(i >= fromInteger(valueOf(32)/2) && i < fromInteger(valueOf(32)));
+    rule mulStep_stage2 if(i >= fromInteger(valueOf(32)/2) && i < fromInteger(valueOf(32)));
         Bit#(32) m = (a[i] == 0) ? 0 : b;
         let s = ripple(m, tp, 0);
         p[i] <= s[0];
