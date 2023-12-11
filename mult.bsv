@@ -18,7 +18,7 @@ interface Multiplier;
     method Bool result_outmul();
     method ActionValue#(Bit#(TAdd#(32,32))) result();
 endinterface
-
+(*synthesize*)
 module mkFoldedMultiplier(Multiplier);
 
     Reg#(Bit#(32)) a <- mkRegU();
