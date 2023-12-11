@@ -1,3 +1,4 @@
+(*synthesize*)
 module mktb (Empty);
     Multiplier  dut <- mkFoldedMultiplier;
     rule input;
