@@ -57,10 +57,6 @@ module mkFoldedMultiplier(Multiplier);
         i <= i + 1;
     endrule
 
-    method Bool start_mul();
-        return i == fromInteger(valueOf(32)+1);
-    endmethod
-
     method Action start(Bit#(32) a_input, Bit#(32) b_input);
         if (i == fromInteger(valueOf(32)+1)) begin
             a <= a_input;
@@ -70,10 +66,6 @@ module mkFoldedMultiplier(Multiplier);
             i_stage1 <= 0;
             advance_to_stage2 <= False; 
         end
-    endmethod
-
-    method Bool result_outmul();
-        return i == fromInteger(valueOf(32));
     endmethod
 
     method ActionValue#(Bit#(TAdd#(32,32))) result();
